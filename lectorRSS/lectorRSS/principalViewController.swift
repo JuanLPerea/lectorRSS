@@ -11,7 +11,8 @@ import Foundation
 import CoreData
 
 class principalViewController: UITableViewController {
-   
+    
+    var urlSeleccionado:URL!
     
     // Recuperamos los datos con una consulta a CoreData
     lazy var noticiasResult:NSFetchedResultsController<Noticias> = {
@@ -94,6 +95,29 @@ class principalViewController: UITableViewController {
         
         return cell
     }
+    
+    // lanzar el Web View cuando pulsamos en una celda...
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let dato = noticiasResult.object(at: indexPath)
+        urlSeleccionado = dato.enlaceNoticia
+        
+        performSegue(withIdentifier: "mostrarNoticia", sender: Any?.self)
+    }
+    
+    // Pasar la url de la celda seleccionada al visor Web
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mostrarNoticia" {
+            
+            let vc = segue.destination as! WebViewController
+            vc.urlNoticia = urlSeleccionado
+            
+        }
+    }
+    
+    // Unwind segue para volver a la pantalla de las noticias
+    @IBAction func unwindToNoticias(segue: UIStoryboardSegue) {}
+    
     
     
     /*

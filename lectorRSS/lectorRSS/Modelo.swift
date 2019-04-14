@@ -212,6 +212,7 @@ func conexionRSS() {
                         nuevaNoticia.titulo = dato.title.rendered
                         nuevaNoticia.descripcion = dato.excerpt.rendered
                         nuevaNoticia.imagenURL = URL(string: dato.jetpackFeaturedMediaURL)
+                        nuevaNoticia.enlaceNoticia = URL(string: dato.link)
                         nuevaNoticia.favorito = false
                         
                         

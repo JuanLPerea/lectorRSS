@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0774E8052263447C0012C485 /* aboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0774E8042263447C0012C485 /* aboutController.swift */; };
 		07E900BC2260FEEB00F43F44 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E900BB2260FEEB00F43F44 /* Extension.swift */; };
 		07E900BE22610B5F00F43F44 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E900BD22610B5F00F43F44 /* Network.swift */; };
+		07E900C02261162100F43F44 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E900BF2261162100F43F44 /* WebViewController.swift */; };
+		07E900C22261168500F43F44 /* WKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E900C12261168500F43F44 /* WKView.swift */; };
 		5AA28B49225F2358005B8B6B /* BasedeDatos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AA28B47225F2358005B8B6B /* BasedeDatos.xcdatamodeld */; };
 		5AD51B0F225DDBE8002AD1BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD51B0E225DDBE8002AD1BE /* AppDelegate.swift */; };
 		5AD51B14225DDBE8002AD1BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AD51B12225DDBE8002AD1BE /* Main.storyboard */; };
@@ -20,8 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0774E8042263447C0012C485 /* aboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutController.swift; sourceTree = "<group>"; };
 		07E900BB2260FEEB00F43F44 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		07E900BD22610B5F00F43F44 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		07E900BF2261162100F43F44 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		07E900C12261168500F43F44 /* WKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKView.swift; sourceTree = "<group>"; };
 		5AA28B48225F2358005B8B6B /* BasedeDatos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BasedeDatos.xcdatamodel; sourceTree = "<group>"; };
 		5AD51B0B225DDBE8002AD1BE /* lectorRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lectorRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD51B0E225DDBE8002AD1BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +72,9 @@
 			children = (
 				5AD51B0E225DDBE8002AD1BE /* AppDelegate.swift */,
 				5AD51B12225DDBE8002AD1BE /* Main.storyboard */,
+				0774E8042263447C0012C485 /* aboutController.swift */,
+				07E900C12261168500F43F44 /* WKView.swift */,
+				07E900BF2261162100F43F44 /* WebViewController.swift */,
 				5AD51B22225DE4E4002AD1BE /* principalViewController.swift */,
 				07E900BD22610B5F00F43F44 /* Network.swift */,
 				5AD51B24225DE50C002AD1BE /* NoticiasTableViewCell.swift */,
@@ -152,11 +161,14 @@
 			files = (
 				5AD51B21225DDD03002AD1BE /* Modelo.swift in Sources */,
 				5AA28B49225F2358005B8B6B /* BasedeDatos.xcdatamodeld in Sources */,
+				0774E8052263447C0012C485 /* aboutController.swift in Sources */,
 				5AD51B25225DE50C002AD1BE /* NoticiasTableViewCell.swift in Sources */,
+				07E900C22261168500F43F44 /* WKView.swift in Sources */,
 				07E900BC2260FEEB00F43F44 /* Extension.swift in Sources */,
 				5AD51B0F225DDBE8002AD1BE /* AppDelegate.swift in Sources */,
 				07E900BE22610B5F00F43F44 /* Network.swift in Sources */,
 				5AD51B23225DE4E4002AD1BE /* principalViewController.swift in Sources */,
+				07E900C02261162100F43F44 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
