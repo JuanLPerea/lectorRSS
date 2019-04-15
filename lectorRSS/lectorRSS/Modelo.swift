@@ -11,7 +11,6 @@ import CoreData
 
 let baseURL = URL(string: "https://applecoding.com/wp-json/wp/v2/posts")!
 
-
 var persistentContainer:NSPersistentContainer = {
     let container = NSPersistentContainer(name: "BasedeDatos")
     container.loadPersistentStores { storeDescription, error in

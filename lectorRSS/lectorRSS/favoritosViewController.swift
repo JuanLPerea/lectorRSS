@@ -10,7 +10,10 @@ import UIKit
 import CoreData
 
 
-class favoritosViewController: UICollectionViewController {
+class favoritosViewController: UICollectionViewController, UITabBarControllerDelegate {
+    
+    var urlSeleccionado:URL!
+    var idSeleccionado:Int64!
     
     lazy var favoritosResult:NSFetchedResultsController<Noticias> = {
         let fetchFavorito:NSFetchRequest<Noticias> = Noticias.fetchRequest()
@@ -26,79 +29,82 @@ class favoritosViewController: UICollectionViewController {
             } catch {
                 print("Error en la consulta de Favoritos")
             }
-            self?.collectionView.reloadData()
+           self?.collectionView.reloadData()
         }
     }
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         reloadTableData()
-       
+        tabBarController?.delegate = self
     }
-
+    
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        let secciones = favoritosResult.sections?.count ?? 0
+        return secciones
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return favoritosResult.sections?[section].numberOfObjects ?? 0
+        let totalfav = favoritosResult.sections?[section].numberOfObjects ?? 0
+    //    print ("Numero de favoritos: \(totalfav)")
+        return totalfav
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "micoleccion", for: indexPath) as! celdasFavoritosController
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celdacoleccion", for: indexPath) as! celdasFavoritosController
+        
+
         
         let dato = favoritosResult.object(at: indexPath)
         
-        cell.tituloFavorito.text = dato.titulo?.htmlString
-        
-        if let imagen = dato.imagenDatos {
-            cell.imagenFavoritos.image = UIImage(data: imagen)
-        } else {
-            cell.imagenFavoritos.image = UIImage(named: "camera")
-        }
-        
-        
+      //  if let titulo = cell.tituloFavorito {
+            cell.tituloFavorito.text = dato.titulo?.htmlString
+     //   }
+
+     //   if let foto = cell.imagenFavoritos {
+            if let imagen = dato.imagenDatos {
+                cell.imagenFavoritos.image = UIImage(data: imagen)
+            }
+     //  }
+
+
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       // print("Has pulsado en: \(indexPath.item)")
+        
+        let dato = favoritosResult.object(at: indexPath)
+        urlSeleccionado = dato.enlaceNoticia
+        idSeleccionado = dato.id
+        
+        performSegue(withIdentifier: "vernoticiafavorita", sender: Any?.self)
+        
     }
-    */
+
+    // Pasar la url de la celda seleccionada al visor Web
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "vernoticiafavorita" {
+            
+            let vc = segue.destination as! WebViewController
+            vc.urlNoticia = urlSeleccionado
+            vc.idNoticia = idSeleccionado
+            
+        }
+    }
+
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 1 {
+       //     print("Recargar Datos Favoritos")
+            self.reloadTableData()
+        }
+    }
+    
 
 }

@@ -19,6 +19,7 @@ class principalViewController: UITableViewController {
     lazy var noticiasResult:NSFetchedResultsController<Noticias> = {
         let fetchNoticias:NSFetchRequest<Noticias> = Noticias.fetchRequest()
         fetchNoticias.sortDescriptors = [NSSortDescriptor(key: #keyPath(Noticias.id), ascending: true)]
+        fetchNoticias.fetchBatchSize = 20
         let consulta = NSFetchedResultsController(fetchRequest: fetchNoticias, managedObjectContext: ctx, sectionNameKeyPath: nil, cacheName: nil)
       //  print ("Recuperar Noticias \(consulta.fetchedObjects?.count ?? 0)")
         return consulta
