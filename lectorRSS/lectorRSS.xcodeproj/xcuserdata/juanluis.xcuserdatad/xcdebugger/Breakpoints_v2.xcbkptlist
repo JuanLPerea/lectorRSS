@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lectorRSS/principalViewController.swift"
-            timestampString = "576931716.670544"
+            timestampString = "577010313.661438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "noticiasResult"
             landmarkType = "24">
          </BreakpointContent>

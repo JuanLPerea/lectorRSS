@@ -13,13 +13,14 @@ import CoreData
 class principalViewController: UITableViewController {
     
     var urlSeleccionado:URL!
+    var idSeleccionado:Int64!
     
     // Recuperamos los datos con una consulta a CoreData
     lazy var noticiasResult:NSFetchedResultsController<Noticias> = {
         let fetchNoticias:NSFetchRequest<Noticias> = Noticias.fetchRequest()
         fetchNoticias.sortDescriptors = [NSSortDescriptor(key: #keyPath(Noticias.id), ascending: true)]
         let consulta = NSFetchedResultsController(fetchRequest: fetchNoticias, managedObjectContext: ctx, sectionNameKeyPath: nil, cacheName: nil)
-        print ("Recuperar Noticias \(consulta.fetchedObjects?.count ?? 0)")
+      //  print ("Recuperar Noticias \(consulta.fetchedObjects?.count ?? 0)")
         return consulta
     }()
     
@@ -59,7 +60,7 @@ class principalViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print ("Numero de noticias \(noticiasResult.sections?[section].numberOfObjects ?? 0)")
+       // print ("Numero de noticias \(noticiasResult.sections?[section].numberOfObjects ?? 0)")
         return noticiasResult.sections?[section].numberOfObjects ?? 0
     }
     
@@ -101,6 +102,7 @@ class principalViewController: UITableViewController {
         
         let dato = noticiasResult.object(at: indexPath)
         urlSeleccionado = dato.enlaceNoticia
+        idSeleccionado = dato.id
         
         performSegue(withIdentifier: "mostrarNoticia", sender: Any?.self)
     }
@@ -111,6 +113,7 @@ class principalViewController: UITableViewController {
             
             let vc = segue.destination as! WebViewController
             vc.urlNoticia = urlSeleccionado
+            vc.idNoticia = idSeleccionado
             
         }
     }

@@ -84,31 +84,31 @@
         <!--Favoritos-->
         <scene sceneID="tTP-fw-O8H">
             <objects>
-                <collectionViewController id="L35-7Y-unH" sceneMemberID="viewController">
+                <collectionViewController id="L35-7Y-unH" customClass="favoritosViewController" customModule="lectorRSS" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Qsu-NW-NTx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="69P-zU-yXb">
-                            <size key="itemSize" width="141" height="175"/>
+                            <size key="itemSize" width="193" height="175"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="micoleccion" id="s9n-HE-uPD">
-                                <rect key="frame" x="0.0" y="0.0" width="141" height="175"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="micoleccion" id="s9n-HE-uPD" customClass="celdasFavoritosController" customModule="lectorRSS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="193" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="141" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="193" height="175"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="02p-Xd-Og4">
-                                            <rect key="frame" x="0.0" y="0.0" width="141" height="146.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="193" height="149"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYD-QO-QQ0">
-                                            <rect key="frame" x="8" y="154.5" width="125" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="8" y="157" width="177" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -123,6 +123,10 @@
                                     <constraint firstItem="02p-Xd-Og4" firstAttribute="top" secondItem="s9n-HE-uPD" secondAttribute="top" id="gbb-Du-6oz"/>
                                     <constraint firstItem="WYD-QO-QQ0" firstAttribute="top" secondItem="02p-Xd-Og4" secondAttribute="bottom" constant="8" id="uVw-Ia-WQH"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="imagenFavoritos" destination="02p-Xd-Og4" id="SLk-JI-Whu"/>
+                                    <outlet property="tituloFavorito" destination="WYD-QO-QQ0" id="jXf-Mr-dgf"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -163,8 +167,16 @@
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem title="Compartir" id="VeD-nf-VUQ"/>
-                                            <barButtonItem title="Favorito" id="BrA-5T-hX0"/>
+                                            <barButtonItem title="Compartir" id="VeD-nf-VUQ">
+                                                <connections>
+                                                    <action selector="compartirBtn:" destination="BQb-9K-zMo" id="oWN-Cc-HLa"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Favorito" id="BrA-5T-hX0">
+                                                <connections>
+                                                    <action selector="favoritoBtn:" destination="BQb-9K-zMo" id="Ogc-T9-eBj"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -180,6 +192,7 @@
                         <viewLayoutGuide key="safeArea" id="isV-Hw-SlC"/>
                     </view>
                     <connections>
+                        <outlet property="compartirBtnFrm" destination="VeD-nf-VUQ" id="yo5-0R-YBU"/>
                         <outlet property="navegadorView" destination="UL2-Fn-sHu" id="PHY-hx-Shp"/>
                         <segue destination="skd-Qa-z2S" kind="unwind" identifier="volverNoticias" unwindAction="unwindToNoticiasWithSegue:" id="Z6L-IW-9I4"/>
                     </connections>
@@ -197,62 +210,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acerca De" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvg-4r-LJy">
-                                <rect key="frame" x="0.0" y="114" width="414" height="34"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aplicación 'cubre expedientes' para el curso 'Carrera Súper Profesional de programación de Aplicaciones Móviles'" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aY6-wk-Z6e">
-                                <rect key="frame" x="20" y="205" width="374" height="61"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoU-N3-UJt">
-                                <rect key="frame" x="20" y="338" width="374" height="101.5"/>
-                                <string key="text">Agradecimientos: A la teletienda sin la cual no hubiera sido posible esta aplicación. Al señor Jobs que Dios le tenga en su gloria. Y a los Donuts y al café de máquina sin los cuales no hubieramos soportado tal tormento.</string>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Perpetrado por Juan Luis Perea López. (2019)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT6-Xs-iq7">
-                                <rect key="frame" x="20" y="499.5" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enlace de interés:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLF-AI-Nqa">
-                                <rect key="frame" x="20" y="554" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="https://www.youtube.com/watch?v=3V4Tdn4C0Js" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tUR-L4-F6I">
-                                <rect key="frame" x="87" y="596" width="240" height="49.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="url"/>
-                            </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="pH3-sA-6na">
+                                <rect key="frame" x="8" y="52" width="398" height="753"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acerca De" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvg-4r-LJy">
+                                        <rect key="frame" x="129.5" y="0.0" width="139" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aplicación 'cubre expedientes' para el curso 'Carrera Súper Profesional de programación de Aplicaciones Móviles'" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aY6-wk-Z6e">
+                                        <rect key="frame" x="0.0" y="115.5" width="398" height="61"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoU-N3-UJt">
+                                        <rect key="frame" x="0.0" y="224.5" width="398" height="101.5"/>
+                                        <string key="text">Agradecimientos: A la teletienda sin la cual no hubiera sido posible esta aplicación. Al señor Jobs que Dios le tenga en su gloria. Y a los Donuts y al café de máquina sin los cuales no hubieramos soportado tal tormento.</string>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Perpetrado por Juan Luis Perea López. (2019)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT6-Xs-iq7">
+                                        <rect key="frame" x="24" y="394.5" width="350.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enlace de interés:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLF-AI-Nqa">
+                                        <rect key="frame" x="131" y="523.5" width="136" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="https://www.youtube.com/watch?v=3V4Tdn4C0Js" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tUR-L4-F6I">
+                                        <rect key="frame" x="32.5" y="608" width="333" height="33"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paper_money" translatesAutoresizingMaskIntoConstraints="NO" id="VRk-jq-vyd">
+                                        <rect key="frame" x="167" y="689" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="9Ii-D3-lKk"/>
+                                            <constraint firstAttribute="width" constant="64" id="mHR-aZ-hXK"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="VRk-jq-vyd" firstAttribute="centerX" secondItem="pH3-sA-6na" secondAttribute="centerX" id="AgD-uF-dlY"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="PT6-Xs-iq7" firstAttribute="leading" secondItem="BsS-Ov-KyL" secondAttribute="leading" constant="20" id="1tA-ud-m9d"/>
-                            <constraint firstItem="MLF-AI-Nqa" firstAttribute="leading" secondItem="BsS-Ov-KyL" secondAttribute="leading" constant="20" id="1wS-UL-Z0g"/>
-                            <constraint firstItem="aY6-wk-Z6e" firstAttribute="top" secondItem="zvg-4r-LJy" secondAttribute="bottom" constant="57" id="7Jv-2E-1Tv"/>
-                            <constraint firstItem="zvg-4r-LJy" firstAttribute="top" secondItem="BsS-Ov-KyL" secondAttribute="top" constant="70" id="9Rz-hw-MgA"/>
-                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="trailing" secondItem="MLF-AI-Nqa" secondAttribute="trailing" constant="20" id="BWW-Hj-zk4"/>
-                            <constraint firstItem="WoU-N3-UJt" firstAttribute="leading" secondItem="BsS-Ov-KyL" secondAttribute="leading" constant="20" id="GFe-Ac-zwQ"/>
-                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="trailing" secondItem="PT6-Xs-iq7" secondAttribute="trailing" constant="20" id="Ilc-2O-7ev"/>
-                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="trailing" secondItem="aY6-wk-Z6e" secondAttribute="trailing" constant="20" id="KRb-ev-FUi"/>
-                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="trailing" secondItem="zvg-4r-LJy" secondAttribute="trailing" id="P66-px-dFK"/>
-                            <constraint firstItem="zvg-4r-LJy" firstAttribute="leading" secondItem="BsS-Ov-KyL" secondAttribute="leading" id="Qni-Q9-rF3"/>
-                            <constraint firstItem="MLF-AI-Nqa" firstAttribute="top" secondItem="PT6-Xs-iq7" secondAttribute="bottom" constant="34" id="R7d-0q-heA"/>
-                            <constraint firstItem="WoU-N3-UJt" firstAttribute="top" secondItem="aY6-wk-Z6e" secondAttribute="bottom" constant="72" id="W5m-9u-H7e"/>
-                            <constraint firstItem="aY6-wk-Z6e" firstAttribute="leading" secondItem="BsS-Ov-KyL" secondAttribute="leading" constant="20" id="ape-kx-qZI"/>
-                            <constraint firstItem="PT6-Xs-iq7" firstAttribute="top" secondItem="WoU-N3-UJt" secondAttribute="bottom" constant="60" id="ccU-dJ-NuK"/>
-                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="trailing" secondItem="WoU-N3-UJt" secondAttribute="trailing" constant="20" id="mNn-EK-gtr"/>
+                            <constraint firstItem="pH3-sA-6na" firstAttribute="top" secondItem="BsS-Ov-KyL" secondAttribute="top" constant="8" id="6mH-4P-ZC8"/>
+                            <constraint firstItem="pH3-sA-6na" firstAttribute="leading" secondItem="lOZ-P4-GuU" secondAttribute="leading" constant="8" id="B1J-7c-BXf"/>
+                            <constraint firstItem="BsS-Ov-KyL" firstAttribute="bottom" secondItem="pH3-sA-6na" secondAttribute="bottom" constant="8" id="QMh-U5-pv9"/>
+                            <constraint firstAttribute="trailing" secondItem="pH3-sA-6na" secondAttribute="trailing" constant="8" id="rEH-li-xch"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BsS-Ov-KyL"/>
                     </view>
@@ -292,5 +308,6 @@
         <image name="following" width="30" height="30"/>
         <image name="info" width="30" height="30"/>
         <image name="literature" width="30" height="30"/>
+        <image name="paper_money" width="30" height="30"/>
     </resources>
 </document>
