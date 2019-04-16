@@ -58,21 +58,11 @@ class favoritosViewController: UICollectionViewController, UITabBarControllerDel
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celdacoleccion", for: indexPath) as! celdasFavoritosController
         
-
-        
         let dato = favoritosResult.object(at: indexPath)
-        
-      //  if let titulo = cell.tituloFavorito {
             cell.tituloFavorito.text = dato.titulo?.htmlString
-     //   }
-
-     //   if let foto = cell.imagenFavoritos {
             if let imagen = dato.imagenDatos {
                 cell.imagenFavoritos.image = UIImage(data: imagen)
             }
-     //  }
-
-
         return cell
     }
     

@@ -15,8 +15,8 @@ class celdasFavoritosController: UICollectionViewCell {
     @IBOutlet weak var tituloFavorito: UILabel!
     
     override func prepareForReuse() {
-      //  imagenFavoritos = nil
-      //  tituloFavorito = nil
+        imagenFavoritos.image = nil
+        tituloFavorito.text = nil
     }
     
     override func awakeFromNib() {
